@@ -2,10 +2,13 @@ package com.example.conversionapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +44,20 @@ public class MainActivity extends AppCompatActivity {
         boolean checked = ((RadioButton) view).isChecked();
 
         EditText numInput = findViewById(R.id.editText);
+
         double Input = Integer.parseInt(numInput.getText().toString());
+        numInput.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                ((RadioGroup) MainActivity.this.findViewById(R.id.radioGroup1)).clearCheck();
+                ((RadioGroup) MainActivity.this.findViewById(R.id.radioGroup2)).clearCheck();
+            }
+
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
         switch (view.getId()) {
             case R.id.radio1:
